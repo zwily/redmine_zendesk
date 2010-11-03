@@ -1,0 +1,24 @@
+<p>
+  <%= content_tag(:label, "Zendesk URL") %>
+  <%= text_field_tag("settings[zendesk_url]", @settings['zendesk_url']) %>
+</p>
+
+<p>
+  <%= content_tag(:label, "Zendesk Username") %>
+  <%= text_field_tag("settings[zendesk_username]", @settings['zendesk_username']) %>
+</p>
+
+<p>
+  <%= content_tag(:label, "Zendesk Password") %>
+  <%= password_field_tag("settings[zendesk_password]", @settings['zendesk_password']) %>
+</p>
+
+<p>
+  <%= content_tag(:label, "Custom Field") %>
+  <%= select_tag("settings[field]", options_from_collection_for_select(CustomField.all, :id, :name, @settings['field'].to_i)) %>
+</p>
+
+<p>
+  <%= content_tag(:label, "Redmine URL") %>
+  <%= text_field_tag("settings[redmine_url]", @settings['redmine_url']) %>
+</p>
