@@ -51,7 +51,7 @@ class ZendeskListener < Redmine::Hook::Listener
       
       ticket = Zendesk::Rest::Ticket.new(:id => zendesk_id)
       ticket.comment = { :is_public => false, :value => comment }
-      ticket.save
+      ticket.save rescue nil
     end
   end
 end
