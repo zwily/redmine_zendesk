@@ -30,7 +30,7 @@ class ZendeskListener < Redmine::Hook::Listener
     return unless zendesk_id_value
     
     zendesk_ids = zendesk_id_value.to_s.split(',').map(&:strip)
-    return unless !zendesk_ids.empty?
+    return if zendesk_ids.empty?
     
     Zendesk::Rest::Ticket.site = Setting.plugin_zendesk_plugin['zendesk_url']
     Zendesk::Rest::Ticket.user = Setting.plugin_zendesk_plugin['zendesk_username']
@@ -41,7 +41,7 @@ class ZendeskListener < Redmine::Hook::Listener
       comment = "Redmine ticket #{issue_url} was updated by #{journal.user.name}:\n\n"
       
       for detail in journal.details
-        comment << show_detail(detail, true)
+        comment << show_detail(detail, true) rescue ""
         comment << "\n"
       end
       
